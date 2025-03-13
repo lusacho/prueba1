@@ -39,4 +39,21 @@ def draw_points(canvas):
         cy = y * CELL_SIZE * ZOOM + CELL_SIZE * ZOOM / 2
         r = CELL_SIZE * ZOOM / 2
         canvas.create_oval(cx - r, cy - r, cx + r, cy + r, fill="red", outline="black")
-        canvas
+        canvas.create_text(cx, cy, text="E", fill="white")
+
+def draw_waypoints(canvas):
+    for x, y in waypoints:
+        cx = x * CELL_SIZE * ZOOM + CELL_SIZE * ZOOM / 2
+        cy = y * CELL_SIZE * ZOOM + CELL_SIZE * ZOOM / 2
+        r = CELL_SIZE * ZOOM / 2
+        canvas.create_oval(cx - r, cy - r, cx + r, cy + r, fill="blue", outline="black")
+        canvas.create_text(cx, cy, text="W", fill="white")
+
+def draw_solution():
+    if maze_obj and maze_obj.solution_path:
+        for (x1, y1), (x2, y2) in zip(maze_obj.solution_path, maze_obj.solution_path[1:]):
+            cx1 = x1 * CELL_SIZE * ZOOM + CELL_SIZE * ZOOM / 2
+            cy1 = y1 * CELL_SIZE * ZOOM + CELL_SIZE * ZOOM / 2
+            cx2 = x2 * CELL_SIZE * ZOOM + CELL_SIZE * ZOOM / 2
+            cy2 = y2 * CELL_SIZE * ZOOM + CELL_SIZE * ZOOM / 2
+            canvas.create_line(cx1, cy1, cx2, cy2, fill="red", width=2)
